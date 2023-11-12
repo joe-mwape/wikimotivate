@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wikimotivate</title>
+    <!--CUSTOM CSS LINK-->
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <!-- Include the axios library -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+
+    <!--BOXICONS LINK-->
+    <link rel="stylesheet"
+    href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <!--REMIXICONS LINK-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!--GOOGLE FONTS-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:ital,wght@0,100;0,400;0,500;0,600;0,700;0,800;1,100;1,400;1,500;1,600;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header id="navbar">
+        <a href="index.html" class="logo">Wiki-Motivate</a>
+
+        <ul class="navlist">
+            <li><a class="nav" href="about.html">About</a></li>
+            <li><a class="nav" href="mission.html">Mision</a></li>
+            <li><a class="nav" href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-text">
+            <h5>Welcome to Wikimotivate. A wikipedia plugin</h5>
+            <h1>motivate</h1>
+            <P>A system that collects most contributing contributors by collecting Edit metrics from Wikipedia.   
+           <br>Integrates with the user interface and provides a dedicated section or feed to showcase the aggregated metadata on the <a href="https://web.facebook.com/profile.php?id=100094560138473" target="_blank" >Wiki-Motivate</a> facebook page.</P>
+        
+         <div class="but">
+            <button onclick="changeText()" id="run-button" class="ctaa" style="margin-right: 10px;" >Fetch top editors</button>
+              <pre id="output"></pre>
+              <button onclick="changeText()" id="post-facebook" class="ctaa" style="margin-right: 10px;" >Post to facebook</button>
+              <pre id="output"></pre>
+         </div>
+
+           <script>
+                function changeText () {
+                    //get button element by ID
+                    var button = document.getElementById ("run-button");
+                    //change text
+                    button.innerHTML= "Fetching top editors";
+                }
+           </script>
+           <script>
+            function changeText () {
+                //get button element by ID
+                var button = document.getElementById ("post-facebook");
+                //change text
+                button.innerHTML= "posted to facebook";               
+            }
+
+       </script>
+           
+        </div> 
+        <div class="console">
+            <p style="color: white;">Top editors</p>
+            <pre style="color: white;" id="data-container"></pre> <!-- Use <pre> to preserve formatting -->
+              <div style="color: aliceblue;" id="statusMessage"></div>
+          </div> 
+          
+    </section>
+    <script>
+      function scrollToBottom() {
+          var consoleContainer = document.querySelector('.console');
+          consoleContainer.scrollTop = consoleContainer.scrollHeight;
+      }
+
+      // Example: Scroll to the bottom every second
+      setInterval(function () {
+          scrollToBottom();
+      }, 200);
+  </script>
+
+<script>
+  document.getElementById('post-facebook').addEventListener('click', function(event) {
+      // Prevent the default form submission behavior
+      event.preventDefault();
+
+      // Make a POST request to the server
+      fetch('http://localhost:3001/run-script', { method: 'POST' })
+          .then(response => response.text())
+          .then(data => {
+              // Display the response in the data-container
+              document.getElementById('data-container').innerText = data;
+          })
+          .catch(error => {
+              console.error('Error:', error);
+          });
+  });
+</script>
+
+
+  <!-- Include your JavaScript code from a separate file -->
+  <script type="module" src="main.js"></script>
+
+</body>
+</html>
+
