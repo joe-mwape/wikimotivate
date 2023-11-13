@@ -1,0 +1,11 @@
+build:
+  - name: Install Dependencies
+    env: node
+    script:
+      - yarn install
+      - python -m venv venv
+      - source venv/bin/activate
+      - pip install -r requirements.txt
+      - yarn build
+      - yarn start
+      - pip install requests
