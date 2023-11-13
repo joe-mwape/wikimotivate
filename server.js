@@ -1,10 +1,12 @@
 const express = require('express');
 const { exec } = require('child_process');
+const cors = require('cors');
 
 const app = express();
 const port = 3001;
 
 app.use(express.static('public'));
+app.use(cors());
 
 app.post('/run-script', (req, res) => {
   const pythonProcess = exec('python main.py');
@@ -26,5 +28,5 @@ app.post('/run-script', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on https://wikimotivate.onrender.com:${port}`);
 });
