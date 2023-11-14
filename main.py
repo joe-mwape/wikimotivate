@@ -1,4 +1,4 @@
-import httpx
+import requests
 from PIL import Image, ImageDraw, ImageFont
 import facebook
 
@@ -12,11 +12,10 @@ def get_top_editors(page_name):
     url = f'https://xtools.wmcloud.org/api/page/top_editors/en.wikipedia.org/{page_name}///5?nobots=true'
 
     try:
-        with httpx.Client() as client:
-            response = client.get(url)
-            response.raise_for_status()
-            return response.json()
-    except httpx.RequestError as e:
+        response = requests.get(url, timeout=None)
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
         return None
 
