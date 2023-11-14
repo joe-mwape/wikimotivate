@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-# Activate the virtual environment
-activate_this = "./venv/bin/main.py"
-exec(open(activate_this).read(), dict(__file__=activate_this))
-
 import requests
 from PIL import Image, ImageDraw, ImageFont
 import facebook
