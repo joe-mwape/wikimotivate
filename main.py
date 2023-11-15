@@ -57,7 +57,7 @@ def create_leaderboard_image(page_name, top_editors_data):
         header_color = (200, 200, 200)
         row_colors = [(255, 165, 0), (169, 169, 169), (139, 69, 19)]
         text_color = (0, 0, 0)
-        font = ImageFont.truetype('arial.ttf', 16)  # Use the Arial font
+        font = ImageFont.load_default()  # Use the Arial font
 
         leaderboard_image = Image.new('RGB', (table_width, table_height), background_color)
         draw = ImageDraw.Draw(leaderboard_image)
@@ -126,7 +126,7 @@ def main():
         image_path = create_leaderboard_image(page, top_editors_data)
         if image_path:
             post_leaderboard_on_facebook(page, image_path, top_editors_data)
-            
+
 if __name__ == "__main__":
     main()
    
