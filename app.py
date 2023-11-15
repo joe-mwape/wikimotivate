@@ -6,13 +6,13 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Set the path to the 'public' directory
-public_path = os.path.join(os.path.dirname(__file__), 'public')
+# Set the path to the 'templates' directory (assuming 'app.py' is in the parent directory)
+templates_path = os.path.join(os.path.dirname(__file__), 'templates')
 
 @app.route('/')
 def index():
-    # Construct the full path to the index.html file
-    index_path = os.path.join(public_path, 'index.html')
+    # Construct the full path to the index.html file within the 'templates' folder
+    index_path = os.path.join(templates_path, 'index.html')
     return render_template(index_path)
 
 @app.route('/run-script', methods=['POST'])
