@@ -110,7 +110,7 @@
         document.getElementById('data-container').innerText = "Posting to Facebook...";
 
         // Make a POST request to the server
-        fetch('http://localhost:5000/run-script', { method: 'POST' })
+        fetch('http://wikimotivate.onrender.com/run-script', { method: 'POST' })
             .then(response => response.json())
             .then(data => {
                 // Display the response in the data-container
