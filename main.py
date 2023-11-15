@@ -57,7 +57,7 @@ def create_leaderboard_image(page_name, top_editors_data):
         header_color = (200, 200, 200)
         row_colors = [(255, 165, 0), (169, 169, 169), (139, 69, 19)]
         text_color = (0, 0, 0)
-        font = ImageFont.load_default() 
+        font = ImageFont.truetype('Roboto-Regular.ttf', 16) 
 
         leaderboard_image = Image.new('RGB', (table_width, table_height), background_color)
         draw = ImageDraw.Draw(leaderboard_image)
