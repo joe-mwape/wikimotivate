@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from subprocess import Popen, PIPE
 from flask_cors import CORS
 
@@ -7,7 +7,7 @@ CORS(app)
 
 @app.route('/')
 def index():
-    return 'Hello, this is your Flask server!'
+    return render_template('index.html')
 
 @app.route('/run-script', methods=['POST'])
 def run_script():
