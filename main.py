@@ -1,6 +1,7 @@
-import requests
+from flask import Flask, render_template, request
 from PIL import Image, ImageDraw, ImageFont
 import facebook
+import requests
 
 # Facebook App credentials
 APP_ID = '238449675721641'
@@ -116,34 +117,6 @@ def post_leaderboard_on_facebook(page_name, image_path, top_editors_data):
     page_id = '102776269561207'  # Replace with your actual Facebook page ID
     graph.put_photo(image=open(image_path, 'rb'), album_path=f"{page_id}/photos", message=post_message)
 
-# Function to create and print a leaderboard for a Wikipedia page
-def create_and_print_leaderboard(page_name):
-    top_editors_data = get_top_editors(page_name)
-    top_editors = top_editors_data.get('top_editors', [])
-
-    if top_editors:
-        print(f"Leaderboard for {page_name}:\n")
-        print("{:<20} {:<10} {:<10} {:<10}".format("Username", "Total Edits", "Minor Edits", "Rank"))
-        for idx, editor in enumerate(top_editors, start=1):
-            if idx > 5:
-                break
-            username = editor.get('username', 'N/A')
-            total_edits = editor.get('count', 0)  # Change label from "count" to "total edits"
-            minor_edits = editor.get('minor', 0)  # Change label from "minor" to "minor edits"
-            rank = ""
-            if idx == 1:
-                rank = "Gold"  # Gold rank
-            elif idx == 2:
-                rank = "Silver"  # Silver rank
-            elif idx == 3:
-                rank = "Bronze"  # Bronze rank
-            else:
-                rank = "Honorary"  # Honorary rank
-            print("{:<20} {:<10} {:<10} {:<10}".format(username, total_edits, minor_edits, rank))
-        print()
-    else:
-        print(f"No data available or an error occurred for {page_name}.")
-
 # Function to run the main process
 def main():
     pages = ["Transport_in_Zambia", "Geography_of_Zambia", "List_of_populated_places_in_Zambia", "History_of_Zambia", "Ministry_of_Health_(Zambia)", "Education_in_Zambia", "Religion_in_Zambia", "Climate_of_Zambia", "National_Assembly_of_Zambia", "Zambia"]
@@ -153,6 +126,7 @@ def main():
         image_path = create_leaderboard_image(page, top_editors_data)
         if image_path:
             post_leaderboard_on_facebook(page, image_path, top_editors_data)
-
+            
 if __name__ == "__main__":
     main()
+   

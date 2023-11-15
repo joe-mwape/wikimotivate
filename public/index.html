@@ -62,22 +62,22 @@
             }
         
             function postToFacebook() {
-                // Display initial message
-                document.getElementById('data-container').innerText = "Posting to Facebook...";
-        
-                // Make a POST request to the server
-                fetch('https://wikimotivate.onrender.com/run-script', { method: 'POST' })
-                    .then(response => response.text())
-                    .then(data => {
-                        // Display the response in the data-container
-                        document.getElementById('data-container').innerText = "Leaderboard successfully posted to Facebook";
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        // Display an error message if there's an issue
-                        document.getElementById('data-container').innerText = "Error posting to Facebook";
-                    });
-            }
+    // Display initial message
+    document.getElementById('data-container').innerText = "Posting to Facebook...";
+
+    // Make a POST request to the server
+    fetch('http://localhost:5000/run-script', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+            // Display the response in the data-container
+            document.getElementById('data-container').innerText = `Output: ${data.output}\nError: ${data.error}`;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Display an error message if there's an issue
+            document.getElementById('data-container').innerText = "Error posting to Facebook";
+        });
+}
         </script>
         
            
@@ -102,22 +102,30 @@
   </script>
 
 <script>
-  document.getElementById('post-facebook').addEventListener('click', function(event) {
-      // Prevent the default form submission behavior
-      event.preventDefault();
+    document.getElementById('post-facebook').addEventListener('click', function (event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
 
-      // Make a POST request to the server
-      fetch('https://wikimotivate.onrender.com/run-script', { method: 'POST' })
-          .then(response => response.text())
-          .then(data => {
-              // Display the response in the data-container
-              document.getElementById('data-container').innerText = data;
-          })
-          .catch(error => {
-              console.error('Error:', error);
-          });
-  });
+        // Display "Posting to Facebook..." message
+        document.getElementById('data-container').innerText = "Posting to Facebook...";
+
+        // Make a POST request to the server
+        fetch('http://localhost:5000/run-script', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                // Display the response in the data-container
+                document.getElementById('data-container').innerText = `Output: ${data.output}\nError: ${data.error}`;
+                // Display "Leaderboard successfully posted to Facebook" message
+                document.getElementById('data-container').innerText = "Leaderboard successfully posted to Facebook";
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Display an error message if there's an issue
+                document.getElementById('data-container').innerText = "Error posting to Facebook";
+            });
+    });
 </script>
+
 
 
   <!-- Include your JavaScript code from a separate file -->
