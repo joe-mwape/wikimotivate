@@ -12,7 +12,7 @@ templates_path = os.path.join(os.path.dirname(__file__), 'templates')
 @app.route('/')
 def index():
     # Construct the full path to the index.html file within the 'templates' folder
-    index_path = os.path.join(templates_path, 'index.html')
+    index_path = os.path.join(templates_path, './templates/index.html')
     return render_template(index_path)
 
 @app.route('/run-script', methods=['POST'])
